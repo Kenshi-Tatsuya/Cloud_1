@@ -44,8 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function goToHome() {
         authPage.classList.remove('active');
         homePage.classList.add('active');
-
-        // Reset output box
         outputBox.innerHTML = '<p>No signs detected yet...</p>';
     }
 
@@ -119,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const base64 = canvas.toDataURL("image/jpeg");
 
-        fetch("http://localhost:8000/predict", {
+        fetch("https://45b3c1ddff30.ngrok-free.app/predict", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ image: base64 })
