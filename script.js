@@ -1,5 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // === 0. Ask for backend URL (ngrok) ===
+    let BACKEND_URL = prompt(
+        "Enter backend API URL (e.g. https://xxxx.ngrok-free.app)",
+        "https://939298752525.ngrok-free.app"
+    );
+    // basic cleanup: remove trailing slash if user adds it
+    if (BACKEND_URL.endsWith("/")) {
+        BACKEND_URL = BACKEND_URL.slice(0, -1);
+    }
+
     // --- Page Elements ---
     const authPage = document.getElementById('auth-page');
     const homePage = document.getElementById('home-page');
@@ -117,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const base64 = canvas.toDataURL("image/jpeg");
 
-        fetch("https://45b3c1ddff30.ngrok-free.app/predict", {
+        fetch(`${BACKEND_URL}/predict`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ image: base64 })
